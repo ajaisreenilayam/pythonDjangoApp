@@ -10,13 +10,13 @@ variable "clustername" {
 }
 variable "techstack-nodegroup" {
   description = "Nodegroup for tech stack components"
-  default = "bettermarks-techstack"
-  type = string  
+  default     = "bettermarks-techstack"
+  type        = string
 }
 variable "application-nodegroup" {
   description = "Nodegroup for application stack components"
-  default = "bettermarks-appstack"
-  type = string  
+  default     = "bettermarks-appstack"
+  type        = string
 }
 variable "namespace" {
   description = "K8S Namepace"

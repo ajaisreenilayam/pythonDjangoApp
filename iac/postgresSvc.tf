@@ -1,7 +1,7 @@
 resource "kubernetes_service" "postgres" {
   depends_on = [kubernetes_deployment.postgres]
   metadata {
-    name = "db-svc"
+    name      = "db-svc"
     namespace = var.namespace
     #labels = kubernetes_deployment.postgres.metadata.0.app
   }

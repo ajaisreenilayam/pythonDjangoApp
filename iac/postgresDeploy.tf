@@ -1,9 +1,7 @@
 resource "kubernetes_deployment" "postgres" {
-  depends_on = [
-    kubernetes_persistent_volume_claim.postgres-volume
-  ]
+
   metadata {
-    name = "postgres"
+    name      = "postgres"
     namespace = var.namespace
     labels = {
       app = "postgres"
@@ -17,7 +15,7 @@ resource "kubernetes_deployment" "postgres" {
         app = "postgres"
       }
     }
-    
+
     template {
       metadata {
         labels = {
@@ -33,29 +31,40 @@ resource "kubernetes_deployment" "postgres" {
         }
         container {
           volume_mount {
-            name = "postgres-volume"
+            name       = "postgres-volume"
             mount_path = "/var/lib/postgresql/data"
-            sub_path = "postgres"
+            sub_path   = "postgres"
           }
           image = "postgres"
           name  = "postgres"
 
           env {
-          name  = "POSTGRES_USER"
-          value = "postgres"
+            name  = "POSTGRES_USER"
+            value = "postgres"
           }
           env {
-          name  = "POSTGRES_PASSWORD"
-          value = "postgres"
+            name  = "POSTGRES_PASSWORD"
+            value = "postgres"
           }
           env {
-          name  = "POSTGRES_DB"
-          value = "postgres"
+            name  = "POSTGRES_DB"
+            value = "postgres"
           }
 
           port {
             container_port = 5432
           }
+          liveness_probe {
+            tcp_socket {
+              port = 5432
+            }
+          }
+          readiness_probe {
+            tcp_socket {
+              port = 5432
+            }
+          }
+
 
           resources {
             limits = {

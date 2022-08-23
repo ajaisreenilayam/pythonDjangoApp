@@ -3,7 +3,7 @@ resource "kubernetes_deployment" "django" {
     kubernetes_deployment.postgres
   ]
   metadata {
-    name = "django"
+    name      = "django"
     namespace = var.namespace
     labels = {
       App = "django"
@@ -25,12 +25,13 @@ resource "kubernetes_deployment" "django" {
       }
       spec {
         container {
-          image = "ajais/django:v1"
+          image = "ajais/django:v3"
           name  = "django"
 
           port {
             container_port = 8000
           }
+
 
           resources {
             limits = {
