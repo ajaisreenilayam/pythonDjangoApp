@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: django
+  name: django
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: django
+    spec:
+      containers:
+      - image: ajais/django:v1
+        name: django
+        resources: {}

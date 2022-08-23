@@ -1,0 +1,4 @@
+terraform destroy --target=kubernetes_deployment.nginx --auto-approve
+terraform destroy --target=kubernetes_deployment.postgres --auto-approve
+terraform destroy --target=kubernetes_namespace.bettermarks --auto-approve
+terraform destroy --target=kubernetes_service.postgres --auto-approve

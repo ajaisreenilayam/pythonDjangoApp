@@ -1,0 +1,6 @@
+k8s.io/cluster-autoscaler/bettermarks   owned
+k8s.io/cluster-autoscaler/enabled	    true
+
+aws iam create-policy \
+    --policy-name AmazonEKSClusterAutoscalerPolicy \
+    --policy-document file://cluster-autoscaler-policy.json
