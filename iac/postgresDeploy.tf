@@ -1,7 +1,10 @@
 resource "kubernetes_deployment" "postgres" {
+  depends_on = [
+    kubernetes_persistent_volume_claim.postgres-volume
+  ]
   metadata {
     name = "postgres"
-    namespace = "bettermarks"
+    namespace = var.namespace
     labels = {
       app = "postgres"
     }
@@ -14,6 +17,7 @@ resource "kubernetes_deployment" "postgres" {
         app = "postgres"
       }
     }
+    
     template {
       metadata {
         labels = {
@@ -21,7 +25,18 @@ resource "kubernetes_deployment" "postgres" {
         }
       }
       spec {
+        volume {
+          name = "postgres-volume"
+          persistent_volume_claim {
+            claim_name = "postgres-pvc"
+          }
+        }
         container {
+          volume_mount {
+            name = "postgres-volume"
+            mount_path = "/var/lib/postgresql/data"
+            sub_path = "postgres"
+          }
           image = "postgres"
           name  = "postgres"
 

@@ -4,7 +4,7 @@ variable "region" {
   default     = "us-east-2"
 }
 variable "clustername" {
-  description = "AWS region"
+  description = "Cluster Name"
   type        = string
   default     = "bettermarks"
 }
@@ -17,4 +17,9 @@ variable "application-nodegroup" {
   description = "Nodegroup for application stack components"
   default = "bettermarks-appstack"
   type = string  
+}
+variable "namespace" {
+  description = "K8S Namepace"
+  type        = string
+  default     = "bettermarks"
 }

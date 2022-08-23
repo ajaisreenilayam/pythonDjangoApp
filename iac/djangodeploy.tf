@@ -1,7 +1,10 @@
 resource "kubernetes_deployment" "django" {
+  depends_on = [
+    kubernetes_deployment.postgres
+  ]
   metadata {
     name = "django"
-    namespace = "bettermarks"
+    namespace = var.namespace
     labels = {
       App = "django"
     }

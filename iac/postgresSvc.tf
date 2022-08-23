@@ -1,11 +1,13 @@
 resource "kubernetes_service" "postgres" {
+  depends_on = [kubernetes_deployment.postgres]
   metadata {
     name = "db-svc"
-    namespace = "bettermarks"
+    namespace = var.namespace
+    #labels = kubernetes_deployment.postgres.metadata.0.app
   }
   spec {
     selector = {
-      app = kubernetes_deployment.postgres.metadata.0.labels.app
+      app = "postgres"
     }
     session_affinity = "ClientIP"
     port {
